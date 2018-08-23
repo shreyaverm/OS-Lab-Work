@@ -1,3 +1,5 @@
+//Round Robin
+
 #include<iostream>
 using namespace std;
 int main()
@@ -57,8 +59,9 @@ int main()
 	
 	avwt/=n;
 	avtat/=n;
-	cout<<"\nAverage Waiting Time:"<<avwt;
-	cout<<"\nAverage Turnaround Time:"<<avtat;
+	
+	cout<<"\n\tAverage Waiting Time:"<<avwt;
+	cout<<"\n\tAverage Turnaround Time:"<<avtat;
 
 	return 0;
 }
