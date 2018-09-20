@@ -1,0 +1,57 @@
+package javaapplication2;
+import java.util.concurrent.Semaphore;
+
+
+class rw{ 
+   static int rc=0;
+   static  Semaphore  s= new Semaphore(1);
+   static Semaphore  wrt= new Semaphore(1);
+
+    static class reader implements Runnable {
+    public void run() {
+        
+        try {
+            s.acquire();
+            rc++;
+            if(rc==1)
+                wrt.acquire();
+                    s.release();
+                    System.out.println(Thread.currentThread().getName()+"is reading");        
+                    System.out.println("Reading");
+                    Thread.sleep(1000);
+                    System.out.println("Read finished");
+                    s.acquire();        
+                        rc--;
+                        if(rc==0)
+                            wrt.release();
+                                s.release();
+        }
+    
+    catch(InterruptedException e) {
+    System.out.print("This is an exception.");
+    
+}
+    }
+    
+}
+
+    public static void main(String[] args) throws Exception{
+         reader r1= new reader();
+         Thread t1= new Thread(r1);
+         Thread t2= new Thread(r1);
+         Thread t3= new Thread(r1);
+                t1.setName("Reader 1");
+                t2.setName("Reader 2");
+                t3.setName("Reader 3");
+                 
+                t1.start();
+                t2.start();
+                t3.start();
+         
+                 
+                 
+    }
+    
+    
+
+}
